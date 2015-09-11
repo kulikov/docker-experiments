@@ -1,0 +1,15 @@
+# General files
+*~
+.DS_Store
+
+# Build files
+node_modules/
+out/
+out.bak/
+*.pyc
+npm-debug.log
+
+# Development stuff
+*.sublime-workspace
+.vagrant
+.idea

@@ -1,0 +1,34 @@
+---
+- hosts: all
+  sudo: yes
+
+  pre_tasks:
+    - name: Update apt cache if needed
+      apt: update_cache=yes cache_valid_time=3600
+
+  # roles:
+  #   - role: angstwad.docker_ubuntu
+
+  tasks:
+    # - name: Add vagrant user to docker group
+    #   user: name=vagrant groups=docker append=yes
+
+    # - name: Install Pip
+    #   apt: name=python-pip state=installed
+
+    # - name: Install Docker Python library.
+    #   pip: name=docker-py state=present
+
+    - name: Build Docker image
+      docker_image:
+        name: inn-4gamer
+        tag: "1.0"
+        path: /vagrant
+        state: build
+
+    - name: Run container
+      docker:
+        image: inn-4gamer:1.0
+        name: inn-4gamer
+        ports: "80:80"
+        state: running
